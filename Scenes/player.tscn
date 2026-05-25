@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bybq7co42ns1q"]
+
+[ext_resource type="Script" uid="uid://v2dm8orhngj8" path="res://Scripts/Player.gd" id="1_3smsa"]
+[ext_resource type="Texture2D" uid="uid://ck1hfg77hg7co" path="res://Assets/zombie_horde_man.png" id="2_x3wgy"]
+[ext_resource type="Script" uid="uid://iaygca8qb34v" path="res://Scripts/StateMachine.gd" id="3_2hs0m"]
+[ext_resource type="Script" uid="uid://dfkjg6aug7psq" path="res://Scripts/States/Player/PlayerWalkingState.gd" id="3_sweqy"]
+[ext_resource type="Script" uid="uid://dhb7pluhsyiga" path="res://Scripts/States/Player/PlayerIdleState.gd" id="4_2hs0m"]
+[ext_resource type="Script" uid="uid://c6bh2hsiugpdk" path="res://Scripts/Hitbox_Hurtbox/Hurtbox.gd" id="6_x3wgy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4flbx"]
+size = Vector2(12, 16.5625)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3smsa"]
+size = Vector2(10, 10)
+
+[node name="Player" type="CharacterBody2D" unique_id=1618639106]
+script = ExtResource("1_3smsa")
+
+[node name="BodyCollider" type="CollisionShape2D" parent="." unique_id=1198407185]
+position = Vector2(0, 1.71875)
+shape = SubResource("RectangleShape2D_4flbx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=369707023]
+position = Vector2(1.9073486e-06, -1.9073486e-06)
+scale = Vector2(0.15625, 0.15625)
+texture = ExtResource("2_x3wgy")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2003536681]
+zoom = Vector2(2, 2)
+
+[node name="StateMachine" type="Node" parent="." unique_id=28337908 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_2hs0m")
+initial_state = NodePath("PlayerIdleState")
+
+[node name="PlayerIdleState" type="Node" parent="StateMachine" unique_id=1907681219 node_paths=PackedStringArray("_player", "_hitbox")]
+script = ExtResource("4_2hs0m")
+_player = NodePath("../..")
+_hitbox = NodePath("../../BodyCollider")
+metadata/_custom_type_script = "uid://dhb7pluhsyiga"
+
+[node name="PlayerWalkingState" type="Node" parent="StateMachine" unique_id=1166339553 node_paths=PackedStringArray("_player", "_hitbox")]
+script = ExtResource("3_sweqy")
+_player = NodePath("../..")
+_hitbox = NodePath("../../BodyCollider")
+metadata/_custom_type_script = "uid://dfkjg6aug7psq"
+
+[node name="AttackingHitbox" type="Area2D" parent="." unique_id=1310073183]
+position = Vector2(-15, 0)
+
+[node name="AttackingHitboxShape" type="CollisionShape2D" parent="AttackingHitbox" unique_id=812603192]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_3smsa")
+disabled = true
+
+[node name="BodyHurtbox" type="Area2D" parent="." unique_id=553158509]
+script = ExtResource("6_x3wgy")
+
+[node name="BodyShape" type="CollisionShape2D" parent="BodyHurtbox" unique_id=1210672314]
+position = Vector2(0, 1.5625)
+shape = SubResource("RectangleShape2D_4flbx")
