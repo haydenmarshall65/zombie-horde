@@ -1,13 +1,13 @@
 class_name Player extends CharacterBody2D
 
 @export var health: int = 3
-var _hurt_time = 0
+var _hurt_time: float = 0
 @export var direction: String = "down"
 
-var HITBOX_UP_POSITION = Vector2(0, -8)
-var HITBOX_DOWN_POSITION = Vector2(0, 8)
-var HITBOX_LEFT_POSITION = Vector2(-6, 0)
-var HITBOX_RIGHT_POSITION = Vector2(6, 0)
+var HITBOX_UP_POSITION: Vector2 = Vector2(0, -8)
+var HITBOX_DOWN_POSITION: Vector2 = Vector2(0, 8)
+var HITBOX_LEFT_POSITION: Vector2 = Vector2(-6, 0)
+var HITBOX_RIGHT_POSITION: Vector2 = Vector2(6, 0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
