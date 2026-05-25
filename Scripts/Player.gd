@@ -1,28 +1,36 @@
 class_name Player extends CharacterBody2D
 
+## The Player is the main character, controlled by the player. It has a hurtbox, collider, and a hitbox.
+
+## The player's health.
 @export var health: int = 3
+## The player's invulnerability timer for when they are hit.
 var _hurt_time: float = 0
+## The direction the player is facing (See `PlayerWalkingState` for more info).
 @export var direction: String = "down"
 
+## A constant for the hitbox position when facing up
 var HITBOX_UP_POSITION: Vector2 = Vector2(0, -8)
+## A constant for the hitbox position when facing down
 var HITBOX_DOWN_POSITION: Vector2 = Vector2(0, 8)
+## A constant for the hitbox position when facing left
 var HITBOX_LEFT_POSITION: Vector2 = Vector2(-6, 0)
+## A constant for the hitbox position when facing right
 var HITBOX_RIGHT_POSITION: Vector2 = Vector2(6, 0)
 
-# Called when the node enters the scene tree for the first time.
+## On ready, connect the hitbox's `is_hit` signal to `_on_hit`
 func _ready() -> void:
 	$BodyHurtbox.is_hit.connect(_on_hit)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+## If the attack button is pressed, enable the attacking hitbox
+## Check each collision. If one of them is a Zombie, take away one health
+## and reset the invulnerability timer.
+## While the invulnerability timer is above 0, the player's hitbox is disabled
+## and `delta` is reduced from it. Once it is at or below 0, the player's hitbox
+## is reenabled. 
+## If the player loses all 4 lives, they are removed.
 func _process(delta: float) -> void:
 	
-	# If the attack button is pressed, enable the attacking hitbox
-	# Check each collision. If one of them is a Zombie, take away one health
-	# and reset the invulnerability timer.
-	# While the invulnerability timer is above 0, the player's hitbox is disabled
-	# and `delta` is reduced from it. Once it is at or below 0, the player's hitbox
-	# is reenabled. 
-	# If the player loses all 4 lives, they are removed.
 	_handle_hitbox()
 	
 	if health < 0:
@@ -42,7 +50,6 @@ func _handle_hitbox():
 		$AttackingHitbox/AttackingHitboxShape.set_deferred("disabled", true)
 	
 	# depending on the position the player is facing, move the hitbox
-	# left: -15, 0. right: 15, 0. up: 0, -15. down: 0, 15
 	match direction:
 		"up":
 			$AttackingHitbox.position = HITBOX_UP_POSITION
@@ -57,6 +64,7 @@ func _handle_hitbox():
 			$AttackingHitbox.position = HITBOX_RIGHT_POSITION
 			$AttackingHitbox/AttackingHitboxShape.position = HITBOX_RIGHT_POSITION
 
+## When the player gets hit, take away one health and reset the invulnerability timer.
 func _on_hit(hitbox: Area2D):
 	if hitbox.name == "ZombieHitbox":
 		_hurt_time = 1

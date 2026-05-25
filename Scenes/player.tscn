@@ -58,3 +58,5 @@ script = ExtResource("6_x3wgy")
 [node name="BodyShape" type="CollisionShape2D" parent="BodyHurtbox" unique_id=1210672314]
 position = Vector2(0, 1.5625)
 shape = SubResource("RectangleShape2D_4flbx")
+
+[node name="Node" type="Node" parent="." unique_id=1951756147]
