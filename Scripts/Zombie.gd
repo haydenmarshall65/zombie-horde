@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Zombie extends CharacterBody2D
 
 @export var _target: CharacterBody2D
 

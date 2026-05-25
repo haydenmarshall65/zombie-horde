@@ -1,5 +1,7 @@
 class_name PlayerHurtState extends BaseState
 
+### UNUSED
+
 var _hurt_time: float = 1
 @export var knockback: Vector2
 

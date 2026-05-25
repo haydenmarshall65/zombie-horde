@@ -6,7 +6,7 @@ signal is_hit(hitbox: Area2D)
 func _ready():
 	connect("area_entered", _on_area_entered)
 
-func _on_area_entered(hitbox: Area2D):
+func _on_area_entered(hitbox: Area2D) -> void:
 	if hitbox == null:
 		return
 	

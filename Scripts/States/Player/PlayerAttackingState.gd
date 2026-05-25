@@ -1,5 +1,7 @@
 class_name PlayerAttackingState extends BaseState
 
+### UNUSED
+
 @export var _hurtbox: CollisionShape2D
 
 func on_enter_state():

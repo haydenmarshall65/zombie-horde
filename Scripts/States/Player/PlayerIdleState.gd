@@ -7,6 +7,6 @@ func on_enter_state():
 func on_exit_state():
 	pass
 
-func update(_delta: float):
+func update(_delta: float) -> void:
 	if _is_moving() == true:
 		Transitioned.emit(self, "playerwalkingstate")
