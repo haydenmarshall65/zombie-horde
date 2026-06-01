@@ -30,6 +30,7 @@ func _ready() -> void:
 ## is reenabled. 
 ## If the player loses all 4 lives, they are removed.
 func _process(delta: float) -> void:
+	# todo add code to add cooldown for attacking
 	
 	_handle_hitbox()
 	

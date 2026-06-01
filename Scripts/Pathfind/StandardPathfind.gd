@@ -5,6 +5,7 @@ func pathfind(delta: float) -> void:
 	# use that angle to determine the type of vector to add to the _entity's current
 	# location.
 	if !_target:
+		print("No target");
 		return
 	
 	var direction: Vector2 = entity.global_position.direction_to(_target.global_position).normalized()

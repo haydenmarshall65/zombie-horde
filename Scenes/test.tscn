@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://qr84qe1s51gr"]
 
 [ext_resource type="PackedScene" uid="uid://bybq7co42ns1q" path="res://Scenes/player.tscn" id="1_8od7v"]
-[ext_resource type="PackedScene" uid="uid://d22q7lgk4hqrr" path="res://Scenes/zombie.tscn" id="2_qc4db"]
+[ext_resource type="PackedScene" uid="uid://f34s02osumcp" path="res://Scenes/zombie_spawner.tscn" id="1_qc4db"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8od7v"]
 size = Vector2(1191, 20)
@@ -14,14 +14,14 @@ size = Vector2(1192, 19.5)
 
 [node name="Test" type="Node2D" unique_id=1101431248]
 
+[node name="ZombieSpawner" parent="." unique_id=1620977475 node_paths=PackedStringArray("target") instance=ExtResource("1_qc4db")]
+position = Vector2(120, 93)
+spawn_interval = 5.0
+target = NodePath("../Player")
+
 [node name="Player" parent="." unique_id=1618639106 instance=ExtResource("1_8od7v")]
 position = Vector2(531, 311)
 scale = Vector2(2, 2)
-
-[node name="Zombie" parent="." unique_id=2072297901 node_paths=PackedStringArray("_target") instance=ExtResource("2_qc4db")]
-position = Vector2(29, 34)
-scale = Vector2(2, 2)
-_target = NodePath("../Player")
 
 [node name="Walls" type="StaticBody2D" parent="." unique_id=1996986915]
 

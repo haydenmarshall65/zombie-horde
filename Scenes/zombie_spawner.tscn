@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://f34s02osumcp"]
+
+[ext_resource type="Script" uid="uid://c4clf23mnbjyl" path="res://Scripts/ZombieSpawner.gd" id="1_y6lrb"]
+[ext_resource type="Script" uid="uid://c6bh2hsiugpdk" path="res://Scripts/Hitbox_Hurtbox/Hurtbox.gd" id="2_ym14x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jey18"]
+
+[node name="ZombieSpawner" type="Node2D" unique_id=1620977475]
+script = ExtResource("1_y6lrb")
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1833852539]
+autostart = true
+
+[node name="ZombieSpawnerHitbox" type="Area2D" parent="." unique_id=1678493242]
+script = ExtResource("2_ym14x")
+
+[node name="HitboxShape" type="CollisionShape2D" parent="ZombieSpawnerHitbox" unique_id=23140259]
+shape = SubResource("RectangleShape2D_jey18")
